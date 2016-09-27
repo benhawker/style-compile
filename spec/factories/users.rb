@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :stylesheet do
+  factory :user do
 
   end
 end
