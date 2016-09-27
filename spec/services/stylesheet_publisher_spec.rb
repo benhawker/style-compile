@@ -4,7 +4,13 @@ RSpec.describe StylesheetPublisher do
 
   let(:user) { User.create(name: "test", email: "test@test.com", access_token: 1) }
   let(:params) do
-    { "access_token" => "1", "brand-success" => "123" }
+    {
+      "brand-success" => "#5cb85c",
+      "brand-primary" => "#5cb85c",
+      "brand-info"    => "#5cb85c",
+      "brand-danger"  => "#5cb85c",
+      "brand-warning" => "#5cb85c"
+    }
   end
 
   subject { described_class.new(user, params) }
@@ -20,13 +26,12 @@ RSpec.describe StylesheetPublisher do
 
     it "persists a compiled .css file to the public/stylesheets dir" do
       allow(subject).to receive(:path) { Rails.root.join("spec/assets/") }
-
       subject.publish!
 
       file_path = "#{Rails.root}/spec/assets/test_a893.css"
       file_content = File.read(file_path)
 
-      fake_css = "\n    body {\n      padding-left: 11em;\n      font-family: Georgia, 'Times New Roman', Times, serif;\n      color: purple;\n      background-color: #d8da3d\n    }\n    "
+      fake_css = "\n@brand-success:   || DEFAULT_COLOR\n@brand-primary\":  || DEFAULT_COLOR\n@brand-info\" :       || DEFAULT_COLOR\n@brand-danger\":    || DEFAULT_COLOR\n@brand-warning\":  || DEFAULT_COLOR\n"
       expect(file_content).to eq fake_css
     end
 

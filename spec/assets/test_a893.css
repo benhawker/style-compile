@@ -1,8 +1,6 @@
 
-    body {
-      padding-left: 11em;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      color: purple;
-      background-color: #d8da3d
-    }
-    
+@brand-success:   || DEFAULT_COLOR
+@brand-primary":  || DEFAULT_COLOR
+@brand-info" :       || DEFAULT_COLOR
+@brand-danger":    || DEFAULT_COLOR
+@brand-warning":  || DEFAULT_COLOR

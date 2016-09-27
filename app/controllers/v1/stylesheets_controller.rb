@@ -22,19 +22,21 @@ module V1
 
     # Format expected (JSON content type):
     #
-    #   {
-    #     "brand-success"     => "#5cb85c",
-    #     "brand-primary"     => "#5cb85c",
-    #     "brand-info"        => "#5cb85c",
-    #     "brand-danger"      => "#5cb85c",
-    #     "brand-warning"     => "#5cb85c"
-    #
+    # {
+    #   "brand-success": "#5cb85c",
+    #   "brand-primary": "#5cb85c",
+    #   "brand-info" : "#5cb85c",
+    #   "brand-danger": "#5cb85c",
+    #   "brand-warning": "#5cb85c"
+    # }
+
     #     # Optional parameters
-    #     "font-family-base"  => "@font-family-sans-serif"
-    #     "font-size-base"    => "14px"
-    #     "font-size-large"   => "ceil((@font-size-base * 1.25))"
-    #     "font-size-small"   => "ceil((@font-size-base * 0.85))"
-    #   }
+    # {
+    #   "font-family-base": "@font-family-sans-serif"
+    #   "font-size-base"  : "14px"
+    #   "font-size-large" : "ceil((@font-size-base * 1.25))"
+    #   "font-size-small" : "ceil((@font-size-base * 0.85))"
+    # }
 
     # # POST /stylesheets
     def create

@@ -9,11 +9,11 @@ class StylesheetCompiler
 
   attr_reader :user, :params
 
-  # For the purposes of this app we have 5 required keys.
-  # REQUIRED_KEYS = [:"brand-success", :"brand-primary",
-  #   :"brand-info", :"brand-danger", :"brand-warning"]
+  DEFAULT_COLOR = "#000000"
 
-  REQUIRED_KEYS = ["brand-success"]
+  # For the purposes of this app we have 5 required keys.
+  REQUIRED_KEYS = ["brand-success", "brand-primary",
+    "brand-info", "brand-danger", "brand-warning"]
 
   # Creates a new +StylesheetCompiler+.
   #
@@ -25,15 +25,14 @@ class StylesheetCompiler
   def compile!
     validate_payload!
 
-    # Sample return.
-    %q(
-    body {
-      padding-left: 11em;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      color: purple;
-      background-color: #d8da3d
-    }
-    )
+    #Sample return
+%Q(
+@brand-success: #{params[:'brand-success']}  || DEFAULT_COLOR
+@brand-primary": #{params[:'brand-primary']} || DEFAULT_COLOR
+@brand-info" : #{params[:'brand-info']}      || DEFAULT_COLOR
+@brand-danger": #{params[:'brand-danger']}   || DEFAULT_COLOR
+@brand-warning": #{params[:'brand-warning']} || DEFAULT_COLOR
+)
   end
 
   private
