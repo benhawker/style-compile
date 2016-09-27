@@ -8,6 +8,9 @@ gem 'rack-cors'
 gem 's3', '~> 0.3.24'
 gem 'dotenv-rails'
 gem 'ruby-filemagic', '~> 0.7.1'
+gem 'less', '~> 2.6'
+gem 'therubyracer', '~> 0.12.2'
+gem 'less-rails', '~> 2.7', '>= 2.7.1'
 
 group :development, :test do
   gem 'byebug', platform: :mri

@@ -2,7 +2,7 @@ module V1
   class ApiController < ApplicationController
     include ActionController::HttpAuthentication::Token::ControllerMethods
 
-    before_filter :ensure_user
+    before_action :ensure_user
 
     private
 

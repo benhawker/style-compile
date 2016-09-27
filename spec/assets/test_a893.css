@@ -1,6 +1,3 @@
-
-@brand-success:   || DEFAULT_COLOR
-@brand-primary":  || DEFAULT_COLOR
-@brand-info" :       || DEFAULT_COLOR
-@brand-danger":    || DEFAULT_COLOR
-@brand-warning":  || DEFAULT_COLOR
+.class {
+  width: 2;
+}

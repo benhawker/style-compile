@@ -4,7 +4,14 @@ module V1
     # # GET /stylesheets
     def index
       @stylesheets = Stylesheet.from_user(user).order(updated_at: :desc)
-      render json: @stylesheets
+
+      if @stylesheets
+        status = :ok
+      else
+        status = :not_found
+      end
+
+      render json: @stylesheets, status: status
     end
 
     # # GET /stylesheets/1
@@ -17,7 +24,7 @@ module V1
         status = :not_found
       end
 
-      render json: @stylesheet
+      render json: @stylesheet, status: status
     end
 
     # Format expected (JSON content type):
@@ -30,7 +37,7 @@ module V1
     #   "brand-warning": "#5cb85c"
     # }
 
-    #     # Optional parameters
+    # # Optional parameters
     # {
     #   "font-family-base": "@font-family-sans-serif"
     #   "font-size-base"  : "14px"
@@ -40,15 +47,22 @@ module V1
 
     # # POST /stylesheets
     def create
-      @stylesheet = StylesheetPublisher.new(user, params).publish!
+      @stylesheet = StylesheetPublisher.new(user, params["brand-success"]).publish!
+
+      # puts "inspectinf"
+      # puts params.inspect
+
+      # puts params[:controller]
+
+      # puts params["brand-success"]
 
       if @stylesheet
         status = :ok
       else
-        status = :not_found
+        status = :unprocessable_entity
       end
 
-      render json: @stylesheet
+      render json: @stylesheet, status: status
     end
 
     private

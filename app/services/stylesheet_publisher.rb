@@ -2,6 +2,7 @@
 # i.e. (full publishing process) for a stylesheet.
 #
 # The goal of this class is to handle all the components involved in the publishing process.
+
 class StylesheetPublisher
   attr_reader :user, :params, :random_code
   # user - the +User+ that is making the request.
@@ -20,6 +21,8 @@ class StylesheetPublisher
 
     stylesheet.save!
     stylesheet
+    # puts compiler.styles
+    # puts params
   rescue => e
     stylesheet.error_message = e.message
   end
@@ -28,11 +31,17 @@ class StylesheetPublisher
 
   def build_stylesheet_file
     file = create_file
-    file << StylesheetCompiler.new(params).compile!
+
+    file << compiler.compile!
     file.close
     file
   end
 
+  def compiler
+    StylesheetCompiler.new(user, params)
+  end
+
+  # We need to write the locals we provide through StylesheetCompiler#styles
   def create_file
     File.open(path + filename, "w")
   end
