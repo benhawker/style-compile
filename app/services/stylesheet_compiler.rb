@@ -1,12 +1,11 @@
-class StylesheetCompiler
-
-  # Error that is raised when there are keys that are required that are not passed.
-  class InvalidPayloadError < StandardError
-    def initialize(missing_keys)
-      super("Payload missing required keys: #{missing_keys.join(", ")}")
-    end
+# Error that is raised when there are keys that are required that are not passed.
+class InvalidPayloadError < StandardError
+  def initialize(missing_keys)
+    super("Payload missing required keys: #{missing_keys.join(", ")}")
   end
+end
 
+class StylesheetCompiler
   attr_reader :user, :params
 
   DEFAULT_COLOR = "#000000"
@@ -44,7 +43,7 @@ class StylesheetCompiler
     # puts "printing params"
     # puts params
     puts self.styles
-    # validate_payload!
+    validate_payload!
 
     # parser = Less::Parser.new
 

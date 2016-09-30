@@ -12,17 +12,19 @@ RSpec.describe StylesheetCompiler do
     }
   end
 
-  subject { described_class.new(params) }
+  let(:user) { User.create(name: "test", email: "test@test.com", access_token: 1) }
+  subject { described_class.new(user, params) }
 
   describe "#compile!" do
     it "returns a compiled stylesheet" do
       fake_css = "\n@brand-success:   || DEFAULT_COLOR\n@brand-primary\":  || DEFAULT_COLOR\n@brand-info\" :       || DEFAULT_COLOR\n@brand-danger\":    || DEFAULT_COLOR\n@brand-warning\":  || DEFAULT_COLOR\n"
+
+      puts subject.compile!
       expect(subject.compile!).to eq fake_css
     end
 
     it "raises an error if the required keys are not passed" do
-      msg = "Payload missing required keys: brand-success, brand-primary, brand-info, brand-danger, brand-warning"
-      expect { described_class.new("brand-nothing" => "123").compile! }.to raise_error(msg)
+      expect { described_class.new(user, "brand-nothing" => "123").compile! }.to raise_error(InvalidPayloadError)
     end
   end
 end

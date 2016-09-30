@@ -49,11 +49,9 @@ module V1
     def create
       @stylesheet = StylesheetPublisher.new(user, params["brand-success"]).publish!
 
-      # puts "inspectinf"
+      # puts "inspecting"
       # puts params.inspect
-
       # puts params[:controller]
-
       # puts params["brand-success"]
 
       if @stylesheet

@@ -25,16 +25,13 @@ RSpec.describe StylesheetPublisher do
       allow(subject).to receive(:filename).and_return("test_a893.css")
     end
 
-    let(:file_path) { "#{Rails.root}/spec/assets/test_a893.css" }
+    let(:folder_path) { Rails.root.join("spec/assets/") }
+    let(:file_path) { "#{folder_path}test_a893.css" }
 
-    it "persists a compiled .css file to the public/stylesheets dir" do
-      allow(subject).to receive(:path) { Rails.root.join("spec/assets/") }
+    it "persists a .css file to the public/stylesheets dir" do
+      allow(subject).to receive(:path) { folder_path }
       subject.publish!
-
-      file_content = File.read(file_path)
-      fake_css = "\n@brand-success:   || DEFAULT_COLOR\n@brand-primary\":  || DEFAULT_COLOR\n@brand-info\" :       || DEFAULT_COLOR\n@brand-danger\":    || DEFAULT_COLOR\n@brand-warning\":  || DEFAULT_COLOR\n"
-      expect(file_content).to eq fake_css
-
+      expect(Dir.entries(folder_path)).to include "test_a893.css"
       File.delete(file_path)
     end
 
