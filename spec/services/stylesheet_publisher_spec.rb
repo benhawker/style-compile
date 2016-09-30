@@ -21,24 +21,35 @@ RSpec.describe StylesheetPublisher do
       expect { subject.publish! }.to change { Stylesheet.count }.by(1)
     end
 
-    before do
-      allow(subject).to receive(:filename).and_return("test_a893.css")
-    end
-
     let(:folder_path) { Rails.root.join("spec/assets/") }
     let(:file_path) { "#{folder_path}test_a893.css" }
 
-    it "persists a .css file to the public/stylesheets dir" do
+    before do
+      allow(subject).to receive(:filename).and_return("test_a893.css")
       allow(subject).to receive(:path) { folder_path }
       subject.publish!
-      expect(Dir.entries(folder_path)).to include "test_a893.css"
-      File.delete(file_path)
+    end
+
+    context "persisting the compiled stylesheet" do
+      it "persists a .css file to the public/stylesheets dir" do
+        expect(Dir.entries(folder_path)).to include "test_a893.css"
+      end
+
+      # Still to get this pasing - although responsibility lies with the Compiler class,
+      it "persists the correct interpolated & compiled data in the file" do
+        file_content = File.read(file_path)
+        fake_css = "xxx"
+        expect(file_content).to eq fake_css
+      end
+
+      after do
+        File.delete(file_path)
+      end
     end
 
     it "the url is persisted to the stylesheet record correctly." do
-      subject.publish!
       stylesheet_record = Stylesheet.last
-      expect(stylesheet_record.url).to eq "#{Rails.root}/public/test_a893.css"
+      expect(stylesheet_record.url).to eq file_path
     end
   end
 end

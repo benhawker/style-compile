@@ -47,7 +47,7 @@ class StylesheetPublisher
   end
 
   def absolute_url
-    "#{Rails.root}/public/#{filename}"
+    "#{path}#{filename}"
   end
 
   def filename

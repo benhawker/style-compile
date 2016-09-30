@@ -19,7 +19,6 @@ RSpec.describe StylesheetCompiler do
     it "returns a compiled stylesheet" do
       fake_css = "\n@brand-success:   || DEFAULT_COLOR\n@brand-primary\":  || DEFAULT_COLOR\n@brand-info\" :       || DEFAULT_COLOR\n@brand-danger\":    || DEFAULT_COLOR\n@brand-warning\":  || DEFAULT_COLOR\n"
 
-      puts subject.compile!
       expect(subject.compile!).to eq fake_css
     end
 
