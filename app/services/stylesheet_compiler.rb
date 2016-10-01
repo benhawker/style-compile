@@ -11,8 +11,8 @@ class StylesheetCompiler
   DEFAULT_COLOR = "#000000"
 
   # For the purposes of this app we have 5 required keys.
-  REQUIRED_KEYS = ["brand-success"]  #, "brand-primary",
-  #   "brand-info", "brand-danger", "brand-warning"]
+  REQUIRED_KEYS = ["brand-success", "brand-primary",
+    "brand-info", "brand-danger", "brand-warning"]
 
   # Creates a new +StylesheetCompiler+.
   #
@@ -30,25 +30,23 @@ class StylesheetCompiler
     File.read(less_file_path)
   end
 
-  # The styles which are rendered through app/views/v1/stylesheets/template.less.erb
-  # Supply local variables which can be accessed in the style view.
-  def styles
-    V1::StylesheetsController.new.render_to_string 'template',
-      formats: [:less],
-      layout:  false,
-      locals:  { params: params }
-  end
-
   def compile!
     validate_payload!
 
-    parser = Less::Parser.new
-
-    tree = parser.parse(less_file_content)
+    tree = parser.parse(interpolated_less)
     tree.to_css
   end
 
   private
+
+  def parser
+    Less::Parser.new
+  end
+
+  def interpolated_less
+    template = ERB.new(File.read(less_file_path))
+    template.result(binding)
+  end
 
   def validate_payload!
     required_keys = REQUIRED_KEYS.dup

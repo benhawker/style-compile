@@ -5,10 +5,10 @@ RSpec.describe StylesheetCompiler do
   let(:params) do
     {
       "brand-success" => "#5cb85c",
-      "brand-primary" => "#5cb85c",
-      "brand-info"    => "#5cb85c",
-      "brand-danger"  => "#5cb85c",
-      "brand-warning" => "#5cb85c"
+      "brand-primary" => "#123",
+      "brand-info"    => "#456",
+      "brand-danger"  => "#789",
+      "brand-warning" => "#abc"
     }
   end
 
@@ -17,7 +17,7 @@ RSpec.describe StylesheetCompiler do
 
   describe "#compile!" do
     it "returns a compiled stylesheet" do
-      compiled_output = ".box {\n  width: 65px;\n  color: saturate(\"<%= @params[\" brand-success \"] %>\", 5%);\n  border-color: \"<%= @params[\" brand-success \"] %>\";\n}\n.box div {\n  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);\n  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);\n}\n"
+      compiled_output = ".box {\n  width: 65px;\n  color: saturate(\"#5cb85c\", 5%);\n  border-color: \"#5cb85c\";\n}\n.box div {\n  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);\n  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);\n}\n"
       expect(subject.compile!).to eq compiled_output
     end
 

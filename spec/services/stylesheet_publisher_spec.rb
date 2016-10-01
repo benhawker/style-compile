@@ -35,10 +35,9 @@ RSpec.describe StylesheetPublisher do
         expect(Dir.entries(folder_path)).to include "test_a893.css"
       end
 
-      # Still to get this pasing - although responsibility lies with the Compiler class,
       it "persists the correct interpolated & compiled data in the file" do
         file_content = File.read(file_path)
-        compiled_content = ".box {\n  width: 65px;\n  color: saturate(\"<%= @params[\" brand-success \"] %>\", 5%);\n  border-color: \"<%= @params[\" brand-success \"] %>\";\n}\n.box div {\n  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);\n  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);\n}\n"
+        compiled_content = ".box {\n  width: 65px;\n  color: saturate(\"#5cb85c\", 5%);\n  border-color: \"#5cb85c\";\n}\n.box div {\n  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);\n  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);\n}\n"
         expect(file_content).to eq compiled_content
       end
 

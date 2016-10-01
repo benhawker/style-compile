@@ -47,12 +47,7 @@ module V1
 
     # # POST /stylesheets
     def create
-      @stylesheet = StylesheetPublisher.new(user, params["brand-success"]).publish!
-
-      # puts "inspecting"
-      # puts params.inspect
-      # puts params[:controller]
-      # puts params["brand-success"]
+      @stylesheet = StylesheetPublisher.new(user, params).publish!
 
       if @stylesheet
         status = :ok

@@ -15,14 +15,11 @@ class StylesheetPublisher
 
   def publish!
     stylesheet = user.stylesheets.build
-
     stylesheet.data = build_stylesheet_file
     stylesheet.url = absolute_url
 
     stylesheet.save!
     stylesheet
-    # puts compiler.styles
-    # puts params
   rescue => e
     stylesheet.error_message = e.message
   end
@@ -41,7 +38,6 @@ class StylesheetPublisher
     StylesheetCompiler.new(user, params)
   end
 
-  # We need to write the locals we provide through StylesheetCompiler#styles
   def create_file
     File.open(path + filename, "w")
   end
