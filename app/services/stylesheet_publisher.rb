@@ -24,7 +24,15 @@ class StylesheetPublisher
     stylesheet.error_message = e.message
   end
 
+  def created_successfully?
+    stylesheet.persisted?
+  end
+
   private
+
+  def stylesheet
+    @stylesheet ||= user.stylesheets.build
+  end
 
   def build_stylesheet_file
     file = create_file

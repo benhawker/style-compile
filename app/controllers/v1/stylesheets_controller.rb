@@ -47,9 +47,10 @@ module V1
 
     # # POST /stylesheets
     def create
-      @stylesheet = StylesheetPublisher.new(user, params).publish!
+      @stylesheet_publisher = StylesheetPublisher.new(user, params)
+      @stylesheet = @stylesheet_publisher.publish!
 
-      if @stylesheet
+      if @stylesheet_publisher.created_successfully?
         status = :ok
       else
         status = :unprocessable_entity

@@ -4,26 +4,28 @@ module V1
 
     before_action :ensure_user
 
+    rescue_from ActiveRecord::RecordNotFound do |exception|
+      render nothing: true, status: :not_found
+    end
+
+    rescue_from ActionController::RoutingError do |exception|
+      render nothing: true, status: 404
+    end
+
     private
 
-    def user
-      @user
-    end
-
     def ensure_user
-      authenticate_token || render_unauthorized
+      false unless user
     end
 
-    def authenticate_token
+    def user
+      @user ||= User.where(access_token: current_access_token).first
+    end
+
+    def current_access_token
       authenticate_or_request_with_http_token do |token, options|
         @user = User.find_by(access_token: token)
       end
     end
-
-    def render_unauthorized
-      self.headers['WWW-Authenticate'] = 'Token realm="Application"'
-      render json: 'Bad Credentials', status: 401
-    end
-
   end
 end

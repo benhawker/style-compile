@@ -21,19 +21,16 @@ RSpec.describe V1::StylesheetsController, :type => :controller do
     }
   end
 
-  it "is unauthorized if no access token is provided" do
-    get :index, params: params
-    expect(response.code).to eq "401"
-  end
+  context "authorization" do
+    it "is unauthorized if no access token is provided" do
+      get :index, params: params
+      expect(response.code).to eq "401"
+    end
 
-
-  it "is authorized if the access token belongs to a user" do
-    # To be changed - don't stub this. Pass correct headers and test api_controller implementation.
-    allow(controller).to receive(:user).and_return(user)
-    allow(controller).to receive(:ensure_user).and_return(true)
-
-    #headers = {'Accept' => 'application/json', 'Content-Type' => 'application/json', 'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Token.encode_credentials(user.access_token) }
-    get :index, params.to_json
-    expect(response.code). to eq "200"
+    it "is authorized if the access token belongs to a user" do
+      allow(controller).to receive(:user).and_return(user)
+      get :index, params.to_json
+      expect(response.code). to eq "200"
+    end
   end
 end
