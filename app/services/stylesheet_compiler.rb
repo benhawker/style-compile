@@ -40,26 +40,12 @@ class StylesheetCompiler
   end
 
   def compile!
-    # puts "printing params"
-    # puts params
-    puts self.styles
     validate_payload!
 
-    # parser = Less::Parser.new
+    parser = Less::Parser.new
 
-    # tree = parser.parse(less_file_content)
-    # tree.to_css
-
-    File.read(less_file_path)
-
-#Sample return
-# %Q(
-# @brand-success: #{params[:'brand-success']}  || DEFAULT_COLOR
-# @brand-primary": #{params[:'brand-primary']} || DEFAULT_COLOR
-# @brand-info" : #{params[:'brand-info']}      || DEFAULT_COLOR
-# @brand-danger": #{params[:'brand-danger']}   || DEFAULT_COLOR
-# @brand-warning": #{params[:'brand-warning']} || DEFAULT_COLOR
-# )
+    tree = parser.parse(less_file_content)
+    tree.to_css
   end
 
   private

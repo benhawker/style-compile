@@ -17,9 +17,8 @@ RSpec.describe StylesheetCompiler do
 
   describe "#compile!" do
     it "returns a compiled stylesheet" do
-      fake_css = "\n@brand-success:   || DEFAULT_COLOR\n@brand-primary\":  || DEFAULT_COLOR\n@brand-info\" :       || DEFAULT_COLOR\n@brand-danger\":    || DEFAULT_COLOR\n@brand-warning\":  || DEFAULT_COLOR\n"
-
-      expect(subject.compile!).to eq fake_css
+      compiled_output = ".box {\n  width: 65px;\n  color: saturate(\"<%= @params[\" brand-success \"] %>\", 5%);\n  border-color: \"<%= @params[\" brand-success \"] %>\";\n}\n.box div {\n  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);\n  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);\n}\n"
+      expect(subject.compile!).to eq compiled_output
     end
 
     it "raises an error if the required keys are not passed" do

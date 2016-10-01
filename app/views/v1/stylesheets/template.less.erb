@@ -1,8 +1,8 @@
-@brand-success:  "<%= @params["brand-success"] %>"
-@brand-primary:  "<%= @params["brand-success"] %>"
-@brand-info" :   "<%= @params["brand-success"] %>"
-@brand-danger:   "<%= @params["brand-success"] %>"
-@brand-warning": "<%= @params["brand-success"] %>"
+@brand-success:  "<%= @params["brand-success"] %>";
+@brand-primary:  "<%= @params["brand-success"] %>";
+@brand-info :   "<%= @params["brand-success"] %>";
+@brand-danger:   "<%= @params["brand-success"] %>";
+@brand-warning: "<%= @params["brand-success"] %>";
 
 .box-shadow(@style, @c) when (iscolor(@c)) {
   -webkit-box-shadow: @style @c;
@@ -14,6 +14,6 @@
 .box {
   width: 50px+15px;
   color: saturate(@brand-success, 5%);
-  border-color: lighten(@brand-info, 30%);
+  border-color: @brand-info;
   div { .box-shadow(0 0 5px, 30%) }
 }
