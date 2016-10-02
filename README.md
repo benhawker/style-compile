@@ -9,28 +9,29 @@ An API built on Rails 5 that compiles a LESS template into CSS whilst interpolat
 
 To run locally try the following commands:
 
-```bundle install```
-```bundle exec rake db:create```
-```bundle exec rake db:migrate```
-```bundle exec rails s```
+* ```bundle install```
+* ```bundle exec rake db:create```
+* ```bundle exec rake db:migrate```
+* ```bundle exec rails s```
 
 To run the specs:
-```bundle exec rspec```
+* ```bundle exec rspec```
 
 Once you have a server running use `curl` or the easy to use Chrome extension `Postman`
 
 You may want to fire up a rails console `rails c` and run create a `User`.
 
-```User.create!(id: 1, name: "test", email: "test@test.com" }```
+* ```User.create!(id: 1, name: "test", email: "test@test.com" }```
 
 Get hold of this user's access_token `(User.last.access_token`) which is created via an ActiveRecord callback.
 
 You can pass HTTP Headers of:
-
+```
 Content-Type => application/json
 Authorization => Token your_token
+```
 
-You can then look to makes call to the API
+You can then look to make calls to the API running locally.
 
 * index
 GET http://localhost:3000/v1/stylesheets/
