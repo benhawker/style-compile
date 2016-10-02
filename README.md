@@ -1,7 +1,7 @@
 
 # Style Compile
 
-An API built on Rails 5 that compiles a LESS template into CSS whilst interpolating a selection variables (selected arbitralily for the purpose of this application).
+An API built on Rails 5 that compiles a LESS template into CSS whilst interpolating a selection variables (selected arbitrarily for the purpose of this application).
 
 ===================
 
