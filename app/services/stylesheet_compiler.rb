@@ -5,6 +5,12 @@ class InvalidPayloadError < StandardError
   end
 end
 
+class InvalidHexCode < StandardError
+  def initialize(hex_code)
+    super("You have passed an invalid hex code")
+  end
+end
+
 class StylesheetCompiler
   attr_reader :user, :params
 
